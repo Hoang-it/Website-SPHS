@@ -13,9 +13,12 @@ const Tree = () => {
   return (
     <TreeStyle>
       <div className="tree">
-        You can use the overflow property when you want to have better control
-        of the layout. The overflow property specifies what happens if content
-        overflows an element's box.
+        <embed
+          src="/src/components/knowldgeTree/5 Practice Tests for the VNU-EPT.pdf"
+          width="500"
+          height="500"
+          type="application/pdf"
+        ></embed>
       </div>
     </TreeStyle>
   );
