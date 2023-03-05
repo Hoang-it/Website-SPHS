@@ -11,6 +11,7 @@ const SearchStyle = styled.div`
   .search-checkbox {
     display: flex;
     gap: 40px;
+    margin-top: 10px;
   }
   .search-input {
     padding: 8px;

@@ -1,30 +1,21 @@
 
 import './App.css';
 import Search from './components/search';
-import Tree from './components/knowldgeTree';
+import KnowledgeTree from './components/knowledgeTree';
+import Content from './components/content/content';
+import Tags from './components/tags';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-complex-tree/lib/style-modern.css';
+
 
 function App() {
   return (
-    <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
+    <div className="App">      
       <Search />
       <div className="content-container">
-        <Tree />
-        <Tree />
-        <Tree />
+        <KnowledgeTree />
+        <Content />
+        <Tags />
       </div>
       
     </div>
