@@ -8,7 +8,7 @@ const TreeStyle = styled.div`
     width: 300px;
     height: 550px;
     overflow-y: scroll;
-    background-color: grey;
+    background-color: white;
     border-style: solid;
   }  
   .badge {
@@ -16,15 +16,15 @@ const TreeStyle = styled.div`
   }
 `;
 
-const Tags = () => {
-
+const Tags = ({tags}) => {
+  
+  const listItems = tags.map((tag) =>
+    <Badge>{tag}</Badge>
+  );
   return (
     <TreeStyle>
       <div className="tree">
-      <Badge>asjdfhasldkfj</Badge>
-      <Badge>asjdfhasldkfj</Badge>
-      <Badge>asjdfhasldkfj</Badge>
-      <Badge>asjdfhasldkfsadfkhasdfkjhaslfkjashdflkjasdhfkalsdjhfaskdjfhakjdhfkjsadhfalksdfhasldkj</Badge>
+      {listItems}
 
       </div>
     </TreeStyle>

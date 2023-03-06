@@ -22,7 +22,7 @@ const TreeStyle = styled.div`
   
 `;
 
-const Content = () => {
+const Content = ({file}) => {
   const [numPages, setNumPages] = useState(null);
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -31,7 +31,7 @@ const Content = () => {
   return (
     <TreeStyle>
       <div className="tree">
-        <Document file="./data/12-8-41.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+        <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
           {Array.from(new Array(numPages), (el, index) => (
               <Page width='828' key={`page_${index + 1}`} pageNumber={index + 1} />
             ))}
