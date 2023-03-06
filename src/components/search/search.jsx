@@ -48,8 +48,12 @@ const Search = ({getData}) => {
       searchKey: getSearchKey
     });
     alert(json)
-    axios.post(`https://localhost:7115/api/CayKienThucs`, json)
+    axios.post(`https://localhost:7115/api/CayKienThucs`, json, {
+      headers: {
+          'Content-Type': 'application/json',
+      }})
       .then(res => {      
+        console.log("in response");
         console.log(res.data.Data);
         getData(res.data.Data);
       })
@@ -92,7 +96,7 @@ const Search = ({getData}) => {
           </div>
           <div>              
             <input type="checkbox" id="congthuc" name="" defaultChecked={getCongThuc} value={getCongThuc} onChange={handleChangeDinhLy}></input>
-            <label for="dinhly"> Công thức</label>
+            <label for="dinhly"> Nội dung</label>
           </div>
           <div>              
             <input type="checkbox" id="noidung" name="" defaultChecked={getNoiDung} value={getNoiDung} onChange={handleChangeNoiDung}></input>
@@ -118,7 +122,7 @@ const Search = ({getData}) => {
             className="search-input"
             type="text"
             placeholder="Tìm kiếm"
-            value={getSearchKey} onChange={evt => setSearchKey(evt)}
+            value={getSearchKey} onChange={evt => setSearchKey(evt.target.value)}
           ></input>
           <button className="search-btn" onClick={() => search()}>Tìm kiếm</button>
         </div>
