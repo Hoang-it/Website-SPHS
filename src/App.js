@@ -8,10 +8,43 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-complex-tree/lib/style-modern.css';
 import { useState } from 'react';
 
+const itemsTest = {
+  root: {
+    index: 'root',
+    canMove: true,
+    isFolder: true,
+    children: ['child1', 'child2'],
+    data: 'Root item',
+    canRename: true,
+  },
+  child1: {
+    index: 'child1',
+    canMove: true,
+    isFolder: false,
+    children: [],
+    data: 'Child item 1',
+    canRename: true,
+  },
+  child2: {
+    index: 'child2',
+    canMove: true,
+    isFolder: true,
+    children: ['child3'],
+    data: 'Child item 2',
+    canRename: true,
+  },
+  child3: {
+    index: 'child3',
+    canMove: true,
+    isFolder: false,
+    children: [],
+    data: 'Child item 2',
+    canRename: true,
+  },
+};
 function App() {  
-  const [data, setData] = useState([]);
-  const [file, setFile] = useState("./data/12-8-41.pdf");
-  const [tags, setTags] = useState(['asdhfkjasdf','aksdfhksd']);
+  const [file, setFile] = useState("");
+  const [tags, setTags] = useState([]);
   const [items, setItems] = useState({});
   
   const handleGetData = (data) => {

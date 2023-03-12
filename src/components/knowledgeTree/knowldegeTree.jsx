@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { UncontrolledTreeEnvironment, Tree, StaticTreeDataProvider } from 'react-complex-tree';
+import { useEffect, useState } from 'react';
+import { ControlledTreeEnvironment, Tree, StaticTreeDataProvider } from 'react-complex-tree';
 
 const TreeStyle = styled.div`
   .tree {
@@ -11,18 +12,31 @@ const TreeStyle = styled.div`
   }
 `;
 
-const KnowledgeTree = ({items, updateContent, updateTags}) => {    
-  const dataProvider = new StaticTreeDataProvider(items, (item, newName) => ({ ...item, data: newName }));
-  console.log("asdfsdaf");
-  console.log(items);
+const KnowledgeTree = ({items, updateContent, updateTags}) => {      
+  const [focusedItem, setFocusedItem] = useState();
+  const [expandedItems, setExpandedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
   return (
     <TreeStyle>
       <div className="tree">
-        <UncontrolledTreeEnvironment
-          dataProvider={dataProvider}
+        {items && <ControlledTreeEnvironment
+          items={items}
           getItemTitle={item => item.data}
-          viewState={{}}
+          viewState={{
+            ['tree-2']: {
+              items,
+              focusedItem,
+          expandedItems,
+          selectedItems,              
+            },
+          }}
+      onExpandItem={item => setExpandedItems([...expandedItems, item.index])}
+      onCollapseItem={item =>
+        setExpandedItems(expandedItems.filter(expandedItemIndex => expandedItemIndex !== item.index))
+      }
+      onSelectItems={items => setSelectedItems(items)}
           onFocusItem={item => {
+            setFocusedItem(item.index)
             console.log(item);
             if (item.children.length === 0){
               updateContent(item.content)
@@ -31,7 +45,7 @@ const KnowledgeTree = ({items, updateContent, updateTags}) => {
           }}
         >
           <Tree treeId="tree-2" rootItem="root" treeLabel="Tree Example" />
-        </UncontrolledTreeEnvironment>;
+        </ControlledTreeEnvironment>}
       </div>
     </TreeStyle>
   );

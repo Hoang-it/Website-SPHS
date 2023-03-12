@@ -28,8 +28,41 @@ const SearchStyle = styled.div`
     cursor: pointer;
   }
 `;
-
-const Search = ({getData}) => {
+const itemsTest = {
+  root: {
+    index: 'root',
+    canMove: true,
+    isFolder: true,
+    children: ['child1', 'child2'],
+    data: 'Root item',
+    canRename: true,
+  },
+  child1: {
+    index: 'child1',
+    isFolder: false,
+    children: [],
+    data: 'Child item 1 test',
+    canMove: true,
+    canRename: true,
+  },
+  child2: {
+    index: 'child2',
+    canMove: true,
+    isFolder: false,
+    children: ['child3'],
+    data: 'Child item 2',
+    canRename: true,
+  },
+  child3: {
+    index: 'child3',
+    canMove: true,
+    isFolder: false,
+    children: [],
+    data: 'Child item 2',
+    canRename: true,
+  },
+};
+const Search = ({getData, resetKnowledTree}) => {
   const [getNoiDung, setNoiDung] = useState(true);
   const [getKhaiNiem, setKhaiNiem] = useState(true);
   const [getCongThuc, setCongThuc] = useState(true);
@@ -47,6 +80,7 @@ const Search = ({getData}) => {
       phuongphap: getPhuongPhap, 
       searchKey: getSearchKey
     });
+    // getData(itemsTest);
     alert(json)
     axios.post(`https://localhost:7115/api/CayKienThucs`, json, {
       headers: {
@@ -58,6 +92,7 @@ const Search = ({getData}) => {
         getData(res.data.Data);
       })
       .catch(error => console.log(error));
+    
   }
 
   const handleChangeKhaiNiem = event => {    
@@ -82,40 +117,19 @@ const Search = ({getData}) => {
   return (
     <SearchStyle>
       <div className="search">
-        <div className="search-checkbox">
-          <div>
-            <input
-              type="checkbox"
-              id="khainiem"
-              name=""
-              value={getKhaiNiem}
-              defaultChecked={getKhaiNiem}
-              onChange={handleChangeKhaiNiem}
-            ></input>
-            <label for="khainiem"> Khái niệm</label>
-          </div>
+        <div className="search-checkbox">          
           <div>              
-            <input type="checkbox" id="congthuc" name="" defaultChecked={getCongThuc} value={getCongThuc} onChange={handleChangeDinhLy}></input>
+            <input type="checkbox" id="congthuc" name="" defaultChecked={getNoiDung} value={getNoiDung} onChange={handleChangeNoiDung}></input>
             <label for="dinhly"> Nội dung</label>
           </div>
           <div>              
-            <input type="checkbox" id="noidung" name="" defaultChecked={getNoiDung} value={getNoiDung} onChange={handleChangeNoiDung}></input>
+            <input type="checkbox" id="noidung" name="" defaultChecked={getCongThuc} value={getCongThuc} onChange={handleChangeDinhLy}></input>
             <label for="dinhly"> Công thức</label>
           </div>
           <div>
             <input type="checkbox" id="baitap" name="" defaultChecked={getDangBaiTap} value={getDangBaiTap} onChange={handleChangeDangBaiTap}></input>
             <label for="baitap"> Dạng bài tập</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="phuongphap"
-              name=""
-              defaultChecked={getPhuongPhap}
-              value={getPhuongPhap} onChange={handleChangePhuongPhap}
-            ></input>
-            <label for="phuongphap"> Phương pháp</label>
-          </div>
+          </div>          
         </div>
         <div>
           <input
